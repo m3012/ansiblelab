@@ -1,0 +1,5 @@
+---
+# defaults file for myapache
+
+apache_enabled: true 
+

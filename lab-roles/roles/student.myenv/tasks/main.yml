@@ -1,0 +1,32 @@
+---
+# tasks file for student.myenv
+
+- name: check for vars...
+  fail:
+    msg: "myenv_user not specified"
+  when: myenv_user == ''
+
+- name: install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ myenv_packages }}"
+
+- name: copy profile picture
+  copy:
+    src: profile.png
+    dest: "/home/{{ myenv_user }}/profile.png"
+
+- name: update bashrc
+  lineinfile:
+    path: "/home/{{ myenv_user }}/.bashrc"
+    line: "alias tree='tree -C'"
+
+- name: install mkcd template
+  template:
+    src: mkcd.sh.j2
+    dest: /etc/profile.d/mkcd.sh
+    owner: root
+    group: root
+    mode: 0644
+

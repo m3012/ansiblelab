@@ -1,0 +1,8 @@
+---
+- name: myenv playbook
+  hosts: all
+  roles:
+    - student.myenv
+  vars:
+    myenv_user: student
+
