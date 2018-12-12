@@ -1,0 +1,8 @@
+---
+- name: use student role
+  hosts: webservers
+  user: devops
+  become: true
+
+  roles:
+    - student.bash_env
