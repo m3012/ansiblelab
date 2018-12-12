@@ -1,0 +1,27 @@
+---
+- name: install httpd
+  yum:
+    name: httpd
+    state: present
+
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: download content
+  copy:
+    src: html/
+    dest: "/var/www/vhosts/{{ ansible_hostname }}"
+
+- name: configure server
+  template:
+    src: vhost.conf.j2
+    dest: /etc/httpd/conf.d/vhost.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart_httpd
+

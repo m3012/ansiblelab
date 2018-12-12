@@ -1,0 +1,17 @@
+---
+- name: Install and start HTTPD 
+  hosts: web
+  tasks:
+  - name: HTTPD verification
+    yum:
+      name: httpd
+      state: present 
+  - name: index.html is present
+    copy:
+      src: files/index.html
+      dest: /var/www/html/index.html
+  - name: httpd is starteed
+    service:
+      name: httpd
+      state: started
+      enabled: true

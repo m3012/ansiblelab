@@ -1,0 +1,16 @@
+---
+- name: install httpd
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ web_package }}"
+    - "{{ ssl_package }}"
+  when: 
+    - inventory_hostname in groups['webservers']
+    - ansible_memtotal_mb > memory
+
+- name: start httpd
+  service:
+    name: "{{ web_service }}"
+    state: started

@@ -1,0 +1,14 @@
+---
+- name: user vhost role playbook
+  hosts: webservers
+
+  pre_tasks:
+    - debug:
+        msg: "Beginning..."
+
+  roles:
+    - myvhost
+
+  post_tasks:
+    - debug:
+        msg: "Configured..."
