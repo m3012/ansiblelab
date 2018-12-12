@@ -13,6 +13,7 @@
 # Command Line History (newest to oldest):
 :x
 :w
+:37
 :c
 :q!
 :12
@@ -33,40 +34,45 @@
 # Input Line History (newest to oldest):
 
 # Registers:
-"1	LINE	0
-	
+""1	LINE	0
+	  become_method: sudo
 "2	LINE	0
-	
+	  become_user: root
 "3	LINE	0
 	:x
 "4	LINE	0
 	
 "5	LINE	0
-	 sckages
-"6	LINE	0
 	
+"6	LINE	0
+	:x
 "7	LINE	0
-	#
+	
 "8	LINE	0
-	#
+	 sckages
 "9	LINE	0
-	#
-""-	CHAR	0
-	s
+	
+"-	CHAR	0
+		
 
 # File marks:
-'0  30  8  ~/configure-delegation/site.yml
-'1  14  6  ~/configure-delegation/site.yml
-'2  77  0  ~/configure-delegation/site.yml
-'3  78  0  ~/configure-delegation/site.yml
-'4  75  21  ~/configure-delegation/site.yml
-'5  49  23  ~/configure-delegation/site.yml
-'6  1  32  ~/configure-delegation/templates/index.html
-'7  5  22  ~/configure-delegation/inventory/hosts
-'8  4  19  ~/lab-roles/roles/myapache/defaults/main.yml
-'9  46  0  ~/lab-roles/roles/myapache/tasks/main.yml
+'0  35  6  ~/configure-async/async.yml
+'1  5  0  ~/configure-async/templates/longfiles.j2
+'2  6  1  ~/configure-async/templates/longfiles.j2
+'3  1  0  ~/configure-async/templates/longfiles.j2
+'4  30  8  ~/configure-delegation/site.yml
+'5  14  6  ~/configure-delegation/site.yml
+'6  77  0  ~/configure-delegation/site.yml
+'7  78  0  ~/configure-delegation/site.yml
+'8  75  21  ~/configure-delegation/site.yml
+'9  49  23  ~/configure-delegation/site.yml
 
 # Jumplist (newest first):
+-'  35  6  ~/configure-async/async.yml
+-'  5  0  ~/configure-async/templates/longfiles.j2
+-'  6  2  ~/configure-async/templates/longfiles.j2
+-'  1  0  ~/configure-async/async.yml
+-'  1  0  ~/configure-async/templates/longfiles.j2
 -'  30  8  ~/configure-delegation/site.yml
 -'  14  8  ~/configure-delegation/site.yml
 -'  77  6  ~/configure-delegation/site.yml
@@ -159,13 +165,38 @@
 -'  17  4  ~/dev-flowcontrol/configure_database.yml
 -'  1  0  ~/dev-flowcontrol/playbook.
 -'  40  8  ~/dev-vars-playbook/playbook.yml
--'  1  0  ~/dev-vars-playbook/playbook.
--'  12  4  ~/dev-flowcontrol/configure_database.yml
--'  1  0  ~/dev-flowcontrol/configure_database.yml
--'  31  0  ~/dev-flowcontrol/playbook.yml
--'  1  0  ~/dev-flowcontrol/playbook.yml
 
 # History of marks within files (newest to oldest):
+
+> ~/configure-async/async.yml
+	"	35	6
+	^	35	48
+	.	35	27
+	+	7	0
+	+	4	2
+	+	6	0
+	+	24	29
+	+	23	12
+	+	22	10
+	+	26	26
+	+	28	27
+	+	29	0
+	+	36	0
+	+	35	27
+
+> ~/configure-async/templates/longfiles.j2
+	"	5	0
+	^	6	2
+	.	5	16
+	+	1	11
+	+	6	12
+	+	9	3
+	+	7	0
+	+	6	0
+	+	8	1
+	+	7	1
+	+	6	1
+	+	5	16
 
 > ~/configure-delegation/site.yml
 	"	30	8
@@ -365,18 +396,3 @@
 	.	19	0
 	+	20	0
 	+	19	0
-
-> ~/dev-roles/use-vhost-role.yml
-	"	14	27
-	^	14	28
-	.	14	27
-	+	9	0
-	+	7	23
-	+	14	27
-
-> ~/dev-roles/roles/myvhost/handlers/main.yml
-	"	7	0
-	^	7	0
-	.	7	0
-	+	8	0
-	+	7	0
