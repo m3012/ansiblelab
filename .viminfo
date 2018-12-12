@@ -12,8 +12,8 @@
 
 # Command Line History (newest to oldest):
 :x
-:c
 :w
+:c
 :q!
 :12
 :42
@@ -52,21 +52,32 @@
 "9	LINE	0
 	#
 ""-	CHAR	0
-	false
+	s
 
 # File marks:
-'0  4  19  ~/lab-roles/roles/myapache/defaults/main.yml
-'1  46  0  ~/lab-roles/roles/myapache/tasks/main.yml
-'2  19  21  ~/lab-roles/roles/myapache/tasks/main.yml
-'3  6  0  ~/lab-roles/apache.yml
-'4  5  0  ~/lab-roles/roles/myapache/defaults/main.yml
-'5  45  0  ~/lab-roles/roles/myapache/tasks/main.yml
-'6  8  0  ~/lab-roles/roles/myapache/handlers/main.yml
-'7  8  0  ~/lab-roles/myenv.yml
-'8  6  0  ~/lab-roles/myenv.yml
-'9  5  0  ~/lab-roles/role/student.myenv/defaults/main.yml
+'0  30  8  ~/configure-delegation/site.yml
+'1  14  6  ~/configure-delegation/site.yml
+'2  77  0  ~/configure-delegation/site.yml
+'3  78  0  ~/configure-delegation/site.yml
+'4  75  21  ~/configure-delegation/site.yml
+'5  49  23  ~/configure-delegation/site.yml
+'6  1  32  ~/configure-delegation/templates/index.html
+'7  5  22  ~/configure-delegation/inventory/hosts
+'8  4  19  ~/lab-roles/roles/myapache/defaults/main.yml
+'9  46  0  ~/lab-roles/roles/myapache/tasks/main.yml
 
 # Jumplist (newest first):
+-'  30  8  ~/configure-delegation/site.yml
+-'  14  8  ~/configure-delegation/site.yml
+-'  77  6  ~/configure-delegation/site.yml
+-'  78  0  ~/configure-delegation/site.yml
+-'  75  8  ~/configure-delegation/site.yml
+-'  49  8  ~/configure-delegation/site.yml
+-'  40  7  ~/configure-delegation/site.yml
+-'  1  0  ~/configure-delegation/site.yml
+-'  1  32  ~/configure-delegation/templates/index.html
+-'  5  22  ~/configure-delegation/inventory/hosts
+-'  1  0  ~/configure-delegation/inventory/hosts
 -'  4  19  ~/lab-roles/roles/myapache/defaults/main.yml
 -'  46  0  ~/lab-roles/roles/myapache/tasks/main.yml
 -'  19  2  ~/lab-roles/roles/myapache/tasks/main.yml
@@ -153,19 +164,57 @@
 -'  1  0  ~/dev-flowcontrol/configure_database.yml
 -'  31  0  ~/dev-flowcontrol/playbook.yml
 -'  1  0  ~/dev-flowcontrol/playbook.yml
--'  12  8  ~/dev-vars-facts/playbook.yml
--'  1  0  ~/dev-vars-facts/playbook.yml
--'  16  31  ~/dev-vars-facts/setup_facts.yml
--'  1  0  ~/dev-vars-facts/setup_facts.yml
--'  4  12  ~/dev-vars-facts/custom.fact
--'  1  0  ~/dev-vars-facts/custom.fact
--'  52  7  ~/dev-vars-playbook/playbook.yml
--'  1  0  ~/dev-vars-playbook/playbook.yml
--'  48  35  ~/imp-playbook/intranet.yml
--'  1  0  ~/imp-playbook/intranet.yml
--'  20  10  ~/basic-playbook/site.yml
 
 # History of marks within files (newest to oldest):
+
+> ~/configure-delegation/site.yml
+	"	30	8
+	^	77	7
+	.	30	20
+	+	12	34
+	+	22	11
+	+	18	15
+	+	27	21
+	+	46	11
+	+	40	0
+	+	49	23
+	+	55	0
+	+	54	2
+	+	71	0
+	+	78	0
+	+	72	15
+	+	73	6
+	+	74	8
+	+	75	8
+	+	76	8
+	+	77	8
+	+	76	6
+	+	77	6
+	+	75	21
+	+	72	3
+	+	73	6
+	+	74	8
+	+	75	8
+	+	76	6
+	+	77	6
+	+	73	0
+	+	74	0
+	+	75	0
+	+	76	0
+	+	77	0
+	+	30	20
+
+> ~/configure-delegation/templates/index.html
+	"	1	32
+	^	1	33
+	.	1	32
+	+	1	32
+
+> ~/configure-delegation/inventory/hosts
+	"	5	22
+	^	5	23
+	.	5	7
+	+	5	7
 
 > ~/lab-roles/roles/myapache/defaults/main.yml
 	"	4	19
@@ -331,19 +380,3 @@
 	.	7	0
 	+	8	0
 	+	7	0
-
-> ~/jinja2-lab/motd.j2
-	"	1	60
-
-> ~/jinja2-lab/motd.yml
-	"	1	0
-
-> ~/jinja2/motd.yml
-	"	4	2
-	^	4	14
-	.	4	13
-	+	13	12
-	+	12	19
-	+	16	17
-	+	5	13
-	+	4	13

@@ -1,0 +1,78 @@
+---
+- name: install and config httpd
+  hosts: all
+  remote_user: devops
+  become: true
+
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: installed
+    - name: start and enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: install fw
+      yum:
+        name: firewalld
+        state: installed
+    - name: start and enable fw
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: enable fw
+      firewalld:
+        zone: public
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: deploy server configs
+      template: 
+        src: "templates/{{ inventory_hostname }}-httpd.conf.j2"
+        dest: /etc/httpd/conf.d/myconfig.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify: 
+        - restart httpd
+
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+
+- name: deploy web service and disable proxy serer
+  hosts: webservers
+  remote_user: devops
+  become: true
+
+  tasks:
+    - name: stop httpd
+      service:
+        name: httpd
+        state: stopped
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups['proxyservers'] }}"
+
+    - name: deploy webpages
+      template:
+        src: templates/index.html.j2
+        dest: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: 0644
+
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups['proxyservers'] }}"
+
