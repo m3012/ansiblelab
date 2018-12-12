@@ -1,0 +1,62 @@
+---
+- name: upgrade webserver
+  
+  remote_user: devops
+  become: true
+
+  hosts: webservers
+
+  serial: 1
+
+  tasks:
+    - name: remove server from proxy
+      haproxy:
+        backend: app
+        socket: /var/lib/haproxy/stats
+        host: "{{ inventory_hostname }}"
+        state: disabled
+        wait: yes
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups.lbserver }}"
+
+    - name: update files
+      template:
+        src: templates/index-ver1.html.j2
+        dest: /var/www/html/index.html
+      register: pageupgrade
+
+    - name: reboot servers
+      command: shutdown -r +1 "Ansible triggered reboot"
+      async: 1
+      poll: 0
+      ignore_errors: true
+      when: pageupgrade.changed
+
+    - name: wait for servers
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        state: started
+        delay: 80
+        timeout: 200
+      become: false
+      delegate_to: localhost
+      when: pageupgrade.changed
+
+    - name: wait for httpd
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 80
+        state: started
+        timeout: 20
+
+    - name: add server to proxy
+      haproxy:
+        backend: app
+        socket: /var/lib/haproxy/stats
+        host: "{{ inventory_hostname }}"
+        state: enabled
+        wait: yes
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups.lbserver }}"
+
