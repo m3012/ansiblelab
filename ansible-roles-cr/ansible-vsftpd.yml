@@ -1,0 +1,63 @@
+---
+- name: ftp servers
+  hosts: ftpservers
+  vars_files:
+    - vars/defaults-template.yml
+    - vars/vars.yml
+
+  become: true
+
+  tasks:
+  #- debug:
+      #var: vsftpd_local_root
+  #- debug:
+      #var: vsftpd_packages
+  
+  - name: install packages
+    yum:
+      name: "{{ item }}"
+      state: installed
+    with_items: "{{ vsftpd_packages }}"
+
+  - name: start services
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: true
+    with_items: "{{ vsftpd_service }}"
+
+  - name: deply vsftpd template
+    template:
+      src: vsftpd.conf.j2
+      dest: "{{ vsftpd_config_file }}"
+      owner: root
+      group: root
+      mode: 0600
+      setype: etc_t
+    notify: restart_vsftpd
+
+  - name: install firewall
+    yum:
+      name: firewalld
+      state: installed
+
+  - name: start firewalld
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
+
+  - name: enable fw
+    firewalld:
+      zone: public
+      service: ftp
+      permanent: true
+      state: enabled
+      immediate: true
+
+  handlers:
+  - name: restart_vsftpd
+    service:
+      name: "{{ vsftpd_service }}"
+      state: restarted
+
