@@ -1,0 +1,59 @@
+---
+- name: upgrade webservers consecutively
+  hosts: webservers
+  remote_user: devops
+  become: true
+  serial: 1
+
+  tasks:
+    - name: disable web server loadbalancing
+      haproxy:
+        state: disabled
+        host: '{{ inventory_hostname }}'
+        socket: /var/lib/haproxy/stats
+        backend: app
+        wait: yes
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups.lbserver }}"
+
+    - name: deploy index
+      template:
+        src: index-ver1.html.j2
+        dest: /var/www/html/index.html
+      register: pageupgrade
+
+    - name: reboot web server
+      shell: /bin/sleep 5 && shutdown -r now 'Ansible updates triggered'
+      async: 1
+      poll: 0
+      ignore_errors: true
+      when: pageupgrade.changed
+
+    - name: wait for web server reboot
+      become: false
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        state: started
+        delay: 25
+        timeout: 200
+      delegate_to: localhost
+      when: pageupgrade.changed
+     
+    - name: wait for web server port to open
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 80
+        state: started
+        delay: 20
+
+    - name: enable web server loadbalancing
+      haproxy:
+        state: enabled
+        host: '{{ inventory_hostname }}'
+        socket: /var/lib/haproxy/stats
+        backend: app
+        wait: yes
+      delegate_to: "{{ item }}"
+      with_items: "{{ groups.lbserver }}"
+
