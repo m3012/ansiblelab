@@ -1,0 +1,1017 @@
+2018-12-13 08:43:51,136 p=30214 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 8, column 30, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+    install_state: installed
+    random_var: This is colon: test
+                             ^ here
+
+2018-12-13 08:45:30,289 p=30267 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 43, column 4, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+   - name: deliver samba config
+   ^ here
+
+2018-12-13 08:46:18,500 p=30299 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 14, column 15, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+      name: samba
+      state: {{ install_state }}
+              ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes.  Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2018-12-13 08:46:45,645 p=30305 u=student |  playbook: samba.yml
+2018-12-13 08:47:58,001 p=30320 u=student |  playbook: samba.yml
+2018-12-13 08:48:13,657 p=30334 u=student |  PLAY [Install a samba server] ***********************************************************************************************
+2018-12-13 08:48:13,686 p=30334 u=student |  TASK [Gathering Facts] ******************************************************************************************************
+2018-12-13 08:48:13,861 p=30334 u=student |  fatal: [servera.lab.exammple.com]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname servera.lab.exammple.com: Name or service not known\r\n", "unreachable": true}
+2018-12-13 08:48:13,862 p=30334 u=student |  	to retry, use: --limit @/home/student/troubleshooting/samba.retry
+
+2018-12-13 08:48:13,862 p=30334 u=student |  PLAY RECAP ******************************************************************************************************************
+2018-12-13 08:48:13,862 p=30334 u=student |  servera.lab.exammple.com   : ok=0    changed=0    unreachable=1    failed=0   
+2018-12-13 08:48:57,449 p=30357 u=student |  Using /home/student/troubleshooting/ansible.cfg as config file
+2018-12-13 08:48:57,502 p=30357 u=student |  Loading callback plugin default of type stdout, v2.0 from /usr/lib/python2.7/site-packages/ansible/plugins/callback/__init__.pyc
+2018-12-13 08:48:57,543 p=30357 u=student |  PLAYBOOK: samba.yml *********************************************************************************************************
+2018-12-13 08:48:57,544 p=30357 u=student |  1 plays in samba.yml
+2018-12-13 08:48:57,562 p=30357 u=student |  PLAY [Install a samba server] ***********************************************************************************************
+2018-12-13 08:48:57,595 p=30357 u=student |  TASK [Gathering Facts] ******************************************************************************************************
+2018-12-13 08:48:57,749 p=30357 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/setup.py
+2018-12-13 08:48:57,758 p=30357 u=student |  fatal: [servera.lab.exammple.com]: UNREACHABLE! => {
+    "changed": false, 
+    "msg": "Failed to connect to the host via ssh: OpenSSH_6.6.1, OpenSSL 1.0.1e-fips 11 Feb 2013\r\ndebug1: Reading configuration data /home/student/.ssh/config\r\ndebug1: /home/student/.ssh/config line 1: Applying options for *\r\ndebug1: Reading configuration data /etc/ssh/ssh_config\r\ndebug1: /etc/ssh/ssh_config line 56: Applying options for *\r\ndebug1: auto-mux: Trying existing master\r\ndebug1: Control socket \"/home/student/.ansible/cp/d4775f48c9\" does not exist\r\nssh: Could not resolve hostname servera.lab.exammple.com: Name or service not known\r\n", 
+    "unreachable": true
+}
+2018-12-13 08:48:57,759 p=30357 u=student |  	to retry, use: --limit @/home/student/troubleshooting/samba.retry
+
+2018-12-13 08:48:57,759 p=30357 u=student |  PLAY RECAP ******************************************************************************************************************
+2018-12-13 08:48:57,759 p=30357 u=student |  servera.lab.exammple.com   : ok=0    changed=0    unreachable=1    failed=0   
+2018-12-13 08:50:21,186 p=30395 u=student |  Using /home/student/troubleshooting/ansible.cfg as config file
+2018-12-13 08:50:21,234 p=30395 u=student |  Loading callback plugin default of type stdout, v2.0 from /usr/lib/python2.7/site-packages/ansible/plugins/callback/__init__.pyc
+2018-12-13 08:50:21,271 p=30395 u=student |  PLAYBOOK: samba.yml *********************************************************************************************************
+2018-12-13 08:50:21,272 p=30395 u=student |  1 plays in samba.yml
+2018-12-13 08:50:21,288 p=30395 u=student |  PLAY [Install a samba server] ***********************************************************************************************
+2018-12-13 08:50:21,318 p=30395 u=student |  TASK [Gathering Facts] ******************************************************************************************************
+2018-12-13 08:50:21,510 p=30395 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/setup.py
+2018-12-13 08:50:21,997 p=30395 u=student |  ok: [servera.lab.example.com]
+2018-12-13 08:50:21,997 p=30395 u=student |  META: ran handlers
+2018-12-13 08:50:21,999 p=30395 u=student |  TASK [install samba] ********************************************************************************************************
+2018-12-13 08:50:21,999 p=30395 u=student |  task path: /home/student/troubleshooting/samba.yml:11
+2018-12-13 08:50:22,113 p=30395 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/packaging/os/yum.py
+2018-12-13 08:50:24,951 p=30395 u=student |  changed: [servera.lab.example.com] => {
+    "changed": true, 
+    "invocation": {
+        "module_args": {
+            "conf_file": null, 
+            "disable_gpg_check": false, 
+            "disablerepo": null, 
+            "enablerepo": null, 
+            "exclude": null, 
+            "install_repoquery": true, 
+            "installroot": "/", 
+            "list": null, 
+            "name": [
+                "samba"
+            ], 
+            "skip_broken": false, 
+            "state": "installed", 
+            "update_cache": false, 
+            "validate_certs": true
+        }
+    }, 
+    "msg": "", 
+    "rc": 0, 
+    "results": [
+        "Loaded plugins: langpacks, search-disabled-repos\nResolving Dependencies\n--> Running transaction check\n---> Package samba.x86_64 0:4.4.4-9.el7 will be installed\n--> Processing Dependency: samba-common = 4.4.4-9.el7 for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: samba-common-libs = 4.4.4-9.el7 for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: samba-common-tools = 4.4.4-9.el7 for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: samba-client-libs = 4.4.4-9.el7 for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: samba-libs = 4.4.4-9.el7 for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libwbclient = 4.4.4-9.el7 for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libauth-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libCHARSET3-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcliauth-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcli-cldap-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcli-nbt-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcli-smb-common-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libdbwrap-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libgenrand-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libgse-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: liblibsmb-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libmessages-dgm-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libmsghdr-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr-nbt.so.0(NDR_NBT_0.0.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr-samba-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr.so.0(NDR_0.0.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr-standard.so.0(NDR_STANDARD_0.0.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libpopt-samba3-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libreplace-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba3-util-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-cluster-support-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-debug-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-errors.so.1(SAMBA_ERRORS_1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-hostconfig.so.0(SAMBA_HOSTCONFIG_0.0.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-passdb.so.0(SAMBA_PASSDB_0.2.0)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-security-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-sockets-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-util.so.0(SAMBA_UTIL_0.0.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsecrets3-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libserver-id-db-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbconf.so.0(SMBCONF_0)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbd-base-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbd-shim-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbregistry-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmb-transport-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsocket-blocking-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsys-rw-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libtdb.so.1(TDB_1.2.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libtdb.so.1(TDB_1.2.5)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libtevent-unix-util.so.0(TEVENT_UNIX_UTIL_0.0.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libtevent-util.so.0(TEVENT_UTIL_0.0.1)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libutil-reg-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libutil-tdb-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libwbclient.so.0(WBCLIENT_0.9)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libxattr-tdb-samba4.so(SAMBA_4.4.4)(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libauth-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libCHARSET3-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcliauth-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcli-cldap-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcli-nbt-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcli-smb-common-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libdbwrap-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libgenrand-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libgse-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: liblibsmb-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libmessages-dgm-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libmsghdr-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr-nbt.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr-samba-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libndr-standard.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libpopt-samba3-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libreplace-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba3-util-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-cluster-support-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-debug-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-errors.so.1()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-hostconfig.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-passdb.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-security-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-sockets-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsamba-util.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsecrets3-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libserver-id-db-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbconf.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbd-base-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbd-shim-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmbregistry-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsmb-transport-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsocket-blocking-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libsys-rw-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libtdb.so.1()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libtevent-unix-util.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libtevent-util.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libutil-reg-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libutil-tdb-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libwbclient.so.0()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Processing Dependency: libxattr-tdb-samba4.so()(64bit) for package: samba-4.4.4-9.el7.x86_64\n--> Running transaction check\n---> Package libtdb.x86_64 0:1.3.8-1.el7_2 will be installed\n---> Package libwbclient.x86_64 0:4.4.4-9.el7 will be installed\n---> Package samba-client-libs.x86_64 0:4.4.4-9.el7 will be installed\n--> Processing Dependency: libldb.so.1(LDB_0.9.10)(64bit) for package: samba-client-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libldb.so.1(LDB_0.9.15)(64bit) for package: samba-client-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libldb.so.1(LDB_0.9.23)(64bit) for package: samba-client-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libldb.so.1(LDB_1.1.1)(64bit) for package: samba-client-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libldb.so.1(LDB_1.1.19)(64bit) for package: samba-client-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libcups.so.2()(64bit) for package: samba-client-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libldb.so.1()(64bit) for package: samba-client-libs-4.4.4-9.el7.x86_64\n---> Package samba-common.noarch 0:4.4.4-9.el7 will be installed\n---> Package samba-common-libs.x86_64 0:4.4.4-9.el7 will be installed\n---> Package samba-common-tools.x86_64 0:4.4.4-9.el7 will be installed\n---> Package samba-libs.x86_64 0:4.4.4-9.el7 will be installed\n--> Processing Dependency: libpytalloc-util.so.2(PYTALLOC_UTIL_2.0.6)(64bit) for package: samba-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libpytalloc-util.so.2(PYTALLOC_UTIL_2.1.6)(64bit) for package: samba-libs-4.4.4-9.el7.x86_64\n--> Processing Dependency: libpytalloc-util.so.2()(64bit) for package: samba-libs-4.4.4-9.el7.x86_64\n--> Running transaction check\n---> Package cups-libs.x86_64 1:1.6.3-26.el7 will be installed\n--> Processing Dependency: libavahi-client.so.3()(64bit) for package: 1:cups-libs-1.6.3-26.el7.x86_64\n--> Processing Dependency: libavahi-common.so.3()(64bit) for package: 1:cups-libs-1.6.3-26.el7.x86_64\n---> Package libldb.x86_64 0:1.1.26-1.el7 will be installed\n---> Package pytalloc.x86_64 0:2.1.6-1.el7 will be installed\n--> Running transaction check\n---> Package avahi-libs.x86_64 0:0.6.31-17.el7 will be installed\n--> Finished Dependency Resolution\n\nDependencies Resolved\n\n================================================================================\n Package                 Arch        Version                Repository     Size\n================================================================================\nInstalling:\n samba                   x86_64      4.4.4-9.el7            rhel_dvd      609 k\nInstalling for dependencies:\n avahi-libs              x86_64      0.6.31-17.el7          rhel_dvd       61 k\n cups-libs               x86_64      1:1.6.3-26.el7         rhel_dvd      356 k\n libldb                  x86_64      1.1.26-1.el7           rhel_dvd      125 k\n libtdb                  x86_64      1.3.8-1.el7_2          rhel_dvd       45 k\n libwbclient             x86_64      4.4.4-9.el7            rhel_dvd       99 k\n pytalloc                x86_64      2.1.6-1.el7            rhel_dvd       15 k\n samba-client-libs       x86_64      4.4.4-9.el7            rhel_dvd      4.6 M\n samba-common            noarch      4.4.4-9.el7            rhel_dvd      190 k\n samba-common-libs       x86_64      4.4.4-9.el7            rhel_dvd      160 k\n samba-common-tools      x86_64      4.4.4-9.el7            rhel_dvd      450 k\n samba-libs              x86_64      4.4.4-9.el7            rhel_dvd      260 k\n\nTransaction Summary\n================================================================================\nInstall  1 Package (+11 Dependent packages)\n\nTotal download size: 6.9 M\nInstalled size: 23 M\nDownloading packages:\n--------------------------------------------------------------------------------\nTotal                                               50 MB/s | 6.9 MB  00:00     \nRunning transaction check\nRunning transaction test\nTransaction test succeeded\nRunning transaction\n  Installing : libtdb-1.3.8-1.el7_2.x86_64                                 1/12 \n  Installing : samba-common-4.4.4-9.el7.noarch                             2/12 \n  Installing : libldb-1.1.26-1.el7.x86_64                                  3/12 \n  Installing : pytalloc-2.1.6-1.el7.x86_64                                 4/12 \n  Installing : avahi-libs-0.6.31-17.el7.x86_64                             5/12 \n  Installing : 1:cups-libs-1.6.3-26.el7.x86_64                             6/12 \n  Installing : libwbclient-4.4.4-9.el7.x86_64                              7/12 \n  Installing : samba-client-libs-4.4.4-9.el7.x86_64                        8/12 \n  Installing : samba-common-libs-4.4.4-9.el7.x86_64                        9/12 \n  Installing : samba-libs-4.4.4-9.el7.x86_64                              10/12 \n  Installing : samba-common-tools-4.4.4-9.el7.x86_64                      11/12 \n  Installing : samba-4.4.4-9.el7.x86_64                                   12/12 \n  Verifying  : libtdb-1.3.8-1.el7_2.x86_64                                 1/12 \n  Verifying  : samba-client-libs-4.4.4-9.el7.x86_64                        2/12 \n  Verifying  : avahi-libs-0.6.31-17.el7.x86_64                             3/12 \n  Verifying  : samba-common-tools-4.4.4-9.el7.x86_64                       4/12 \n  Verifying  : samba-common-4.4.4-9.el7.noarch                             5/12 \n  Verifying  : samba-4.4.4-9.el7.x86_64                                    6/12 \n  Verifying  : libldb-1.1.26-1.el7.x86_64                                  7/12 \n  Verifying  : libwbclient-4.4.4-9.el7.x86_64                              8/12 \n  Verifying  : 1:cups-libs-1.6.3-26.el7.x86_64                             9/12 \n  Verifying  : samba-common-libs-4.4.4-9.el7.x86_64                       10/12 \n  Verifying  : pytalloc-2.1.6-1.el7.x86_64                                11/12 \n  Verifying  : samba-libs-4.4.4-9.el7.x86_64                              12/12 \n\nInstalled:\n  samba.x86_64 0:4.4.4-9.el7                                                    \n\nDependency Installed:\n  avahi-libs.x86_64 0:0.6.31-17.el7                                             \n  cups-libs.x86_64 1:1.6.3-26.el7                                               \n  libldb.x86_64 0:1.1.26-1.el7                                                  \n  libtdb.x86_64 0:1.3.8-1.el7_2                                                 \n  libwbclient.x86_64 0:4.4.4-9.el7                                              \n  pytalloc.x86_64 0:2.1.6-1.el7                                                 \n  samba-client-libs.x86_64 0:4.4.4-9.el7                                        \n  samba-common.noarch 0:4.4.4-9.el7                                             \n  samba-common-libs.x86_64 0:4.4.4-9.el7                                        \n  samba-common-tools.x86_64 0:4.4.4-9.el7                                       \n  samba-libs.x86_64 0:4.4.4-9.el7                                               \n\nComplete!\n"
+    ]
+}
+2018-12-13 08:50:24,953 p=30395 u=student |  TASK [install firewalld] ****************************************************************************************************
+2018-12-13 08:50:24,953 p=30395 u=student |  task path: /home/student/troubleshooting/samba.yml:16
+2018-12-13 08:50:24,962 p=30395 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/packaging/os/yum.py
+2018-12-13 08:50:25,269 p=30395 u=student |  ok: [servera.lab.example.com] => {
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "conf_file": null, 
+            "disable_gpg_check": false, 
+            "disablerepo": null, 
+            "enablerepo": null, 
+            "exclude": null, 
+            "install_repoquery": true, 
+            "installroot": "/", 
+            "list": null, 
+            "name": [
+                "firewalld"
+            ], 
+            "skip_broken": false, 
+            "state": "installed", 
+            "update_cache": false, 
+            "validate_certs": true
+        }
+    }, 
+    "msg": "", 
+    "rc": 0, 
+    "results": [
+        "firewalld-0.4.3.2-8.el7.noarch providing firewalld is already installed"
+    ]
+}
+2018-12-13 08:50:25,271 p=30395 u=student |  TASK [debug install_state variable] *****************************************************************************************
+2018-12-13 08:50:25,271 p=30395 u=student |  task path: /home/student/troubleshooting/samba.yml:21
+2018-12-13 08:50:25,281 p=30395 u=student |  ok: [servera.lab.example.com] => {
+    "msg": "The state for the samba service is installed"
+}
+2018-12-13 08:50:25,284 p=30395 u=student |  TASK [start samba] **********************************************************************************************************
+2018-12-13 08:50:25,284 p=30395 u=student |  task path: /home/student/troubleshooting/samba.yml:24
+2018-12-13 08:50:25,293 p=30395 u=student |  Running systemd
+2018-12-13 08:50:25,377 p=30395 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/systemd.py
+2018-12-13 08:50:25,770 p=30395 u=student |  changed: [servera.lab.example.com] => {
+    "changed": true, 
+    "enabled": true, 
+    "invocation": {
+        "module_args": {
+            "daemon_reload": false, 
+            "enabled": true, 
+            "masked": null, 
+            "name": "smb", 
+            "no_block": false, 
+            "state": "started", 
+            "user": false
+        }
+    }, 
+    "name": "smb", 
+    "state": "started", 
+    "status": {
+        "ActiveEnterTimestampMonotonic": "0", 
+        "ActiveExitTimestampMonotonic": "0", 
+        "ActiveState": "inactive", 
+        "After": "nmb.service basic.target systemd-journald.socket system.slice syslog.target network.target winbind.service", 
+        "AllowIsolate": "no", 
+        "AssertResult": "no", 
+        "AssertTimestampMonotonic": "0", 
+        "Before": "shutdown.target", 
+        "BlockIOAccounting": "no", 
+        "BlockIOWeight": "18446744073709551615", 
+        "CPUAccounting": "no", 
+        "CPUQuotaPerSecUSec": "infinity", 
+        "CPUSchedulingPolicy": "0", 
+        "CPUSchedulingPriority": "0", 
+        "CPUSchedulingResetOnFork": "no", 
+        "CPUShares": "18446744073709551615", 
+        "CanIsolate": "no", 
+        "CanReload": "yes", 
+        "CanStart": "yes", 
+        "CanStop": "yes", 
+        "CapabilityBoundingSet": "18446744073709551615", 
+        "ConditionResult": "no", 
+        "ConditionTimestampMonotonic": "0", 
+        "Conflicts": "shutdown.target", 
+        "ControlPID": "0", 
+        "DefaultDependencies": "yes", 
+        "Delegate": "no", 
+        "Description": "Samba SMB Daemon", 
+        "DevicePolicy": "auto", 
+        "Environment": "KRB5CCNAME=FILE:/run/samba/krb5cc_samba", 
+        "EnvironmentFile": "/etc/sysconfig/samba (ignore_errors=yes)", 
+        "ExecMainCode": "0", 
+        "ExecMainExitTimestampMonotonic": "0", 
+        "ExecMainPID": "0", 
+        "ExecMainStartTimestampMonotonic": "0", 
+        "ExecMainStatus": "0", 
+        "ExecReload": "{ path=/usr/bin/kill ; argv[]=/usr/bin/kill -HUP $MAINPID ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", 
+        "ExecStart": "{ path=/usr/sbin/smbd ; argv[]=/usr/sbin/smbd $SMBDOPTIONS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", 
+        "FailureAction": "none", 
+        "FileDescriptorStoreMax": "0", 
+        "FragmentPath": "/usr/lib/systemd/system/smb.service", 
+        "GuessMainPID": "yes", 
+        "IOScheduling": "0", 
+        "Id": "smb.service", 
+        "IgnoreOnIsolate": "no", 
+        "IgnoreOnSnapshot": "no", 
+        "IgnoreSIGPIPE": "yes", 
+        "InactiveEnterTimestampMonotonic": "0", 
+        "InactiveExitTimestampMonotonic": "0", 
+        "JobTimeoutAction": "none", 
+        "JobTimeoutUSec": "0", 
+        "KillMode": "control-group", 
+        "KillSignal": "15", 
+        "LimitAS": "18446744073709551615", 
+        "LimitCORE": "18446744073709551615", 
+        "LimitCPU": "18446744073709551615", 
+        "LimitDATA": "18446744073709551615", 
+        "LimitFSIZE": "18446744073709551615", 
+        "LimitLOCKS": "18446744073709551615", 
+        "LimitMEMLOCK": "65536", 
+        "LimitMSGQUEUE": "819200", 
+        "LimitNICE": "0", 
+        "LimitNOFILE": "16384", 
+        "LimitNPROC": "1801", 
+        "LimitRSS": "18446744073709551615", 
+        "LimitRTPRIO": "0", 
+        "LimitRTTIME": "18446744073709551615", 
+        "LimitSIGPENDING": "1801", 
+        "LimitSTACK": "18446744073709551615", 
+        "LoadState": "loaded", 
+        "MainPID": "0", 
+        "MemoryAccounting": "no", 
+        "MemoryCurrent": "18446744073709551615", 
+        "MemoryLimit": "18446744073709551615", 
+        "MountFlags": "0", 
+        "Names": "smb.service", 
+        "NeedDaemonReload": "no", 
+        "Nice": "0", 
+        "NoNewPrivileges": "no", 
+        "NonBlocking": "no", 
+        "NotifyAccess": "all", 
+        "OOMScoreAdjust": "0", 
+        "OnFailureJobMode": "replace", 
+        "PIDFile": "/run/smbd.pid", 
+        "PermissionsStartOnly": "no", 
+        "PrivateDevices": "no", 
+        "PrivateNetwork": "no", 
+        "PrivateTmp": "no", 
+        "ProtectHome": "no", 
+        "ProtectSystem": "no", 
+        "RefuseManualStart": "no", 
+        "RefuseManualStop": "no", 
+        "RemainAfterExit": "no", 
+        "Requires": "basic.target", 
+        "Restart": "no", 
+        "RestartUSec": "100ms", 
+        "Result": "success", 
+        "RootDirectoryStartOnly": "no", 
+        "RuntimeDirectoryMode": "0755", 
+        "SameProcessGroup": "no", 
+        "SecureBits": "0", 
+        "SendSIGHUP": "no", 
+        "SendSIGKILL": "yes", 
+        "Slice": "system.slice", 
+        "StandardError": "inherit", 
+        "StandardInput": "null", 
+        "StandardOutput": "journal", 
+        "StartLimitAction": "none", 
+        "StartLimitBurst": "5", 
+        "StartLimitInterval": "10000000", 
+        "StartupBlockIOWeight": "18446744073709551615", 
+        "StartupCPUShares": "18446744073709551615", 
+        "StatusErrno": "0", 
+        "StopWhenUnneeded": "no", 
+        "SubState": "dead", 
+        "SyslogLevelPrefix": "yes", 
+        "SyslogPriority": "30", 
+        "SystemCallErrorNumber": "0", 
+        "TTYReset": "no", 
+        "TTYVHangup": "no", 
+        "TTYVTDisallocate": "no", 
+        "TimeoutStartUSec": "1min 30s", 
+        "TimeoutStopUSec": "1min 30s", 
+        "TimerSlackNSec": "50000", 
+        "Transient": "no", 
+        "Type": "notify", 
+        "UMask": "0022", 
+        "UnitFilePreset": "disabled", 
+        "UnitFileState": "disabled", 
+        "Wants": "system.slice", 
+        "WatchdogTimestampMonotonic": "0", 
+        "WatchdogUSec": "0"
+    }
+}
+2018-12-13 08:50:25,772 p=30395 u=student |  TASK [start firewalld] ******************************************************************************************************
+2018-12-13 08:50:25,772 p=30395 u=student |  task path: /home/student/troubleshooting/samba.yml:30
+2018-12-13 08:50:25,782 p=30395 u=student |  Running systemd
+2018-12-13 08:50:25,783 p=30395 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/systemd.py
+2018-12-13 08:50:25,977 p=30395 u=student |  ok: [servera.lab.example.com] => {
+    "changed": false, 
+    "enabled": true, 
+    "invocation": {
+        "module_args": {
+            "daemon_reload": false, 
+            "enabled": true, 
+            "masked": null, 
+            "name": "firewalld", 
+            "no_block": false, 
+            "state": "started", 
+            "user": false
+        }
+    }, 
+    "name": "firewalld", 
+    "state": "started", 
+    "status": {
+        "ActiveEnterTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "ActiveEnterTimestampMonotonic": "185910243578", 
+        "ActiveExitTimestampMonotonic": "0", 
+        "ActiveState": "active", 
+        "After": "system.slice dbus.service basic.target polkit.service", 
+        "AllowIsolate": "no", 
+        "AssertResult": "yes", 
+        "AssertTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "AssertTimestampMonotonic": "185910069374", 
+        "Before": "network.target NetworkManager.service shutdown.target libvirtd.service", 
+        "BlockIOAccounting": "no", 
+        "BlockIOWeight": "18446744073709551615", 
+        "BusName": "org.fedoraproject.FirewallD1", 
+        "CPUAccounting": "no", 
+        "CPUQuotaPerSecUSec": "infinity", 
+        "CPUSchedulingPolicy": "0", 
+        "CPUSchedulingPriority": "0", 
+        "CPUSchedulingResetOnFork": "no", 
+        "CPUShares": "18446744073709551615", 
+        "CanIsolate": "no", 
+        "CanReload": "yes", 
+        "CanStart": "yes", 
+        "CanStop": "yes", 
+        "CapabilityBoundingSet": "18446744073709551615", 
+        "ConditionResult": "yes", 
+        "ConditionTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "ConditionTimestampMonotonic": "185910069374", 
+        "Conflicts": "shutdown.target ebtables.service ipset.service iptables.service ip6tables.service", 
+        "ControlGroup": "/system.slice/firewalld.service", 
+        "ControlPID": "0", 
+        "DefaultDependencies": "yes", 
+        "Delegate": "no", 
+        "Description": "firewalld - dynamic firewall daemon", 
+        "DevicePolicy": "auto", 
+        "Documentation": "man:firewalld(1)", 
+        "EnvironmentFile": "/etc/sysconfig/firewalld (ignore_errors=yes)", 
+        "ExecMainCode": "0", 
+        "ExecMainExitTimestampMonotonic": "0", 
+        "ExecMainPID": "30874", 
+        "ExecMainStartTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "ExecMainStartTimestampMonotonic": "185910070698", 
+        "ExecMainStatus": "0", 
+        "ExecReload": "{ path=/bin/kill ; argv[]=/bin/kill -HUP $MAINPID ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", 
+        "ExecStart": "{ path=/usr/sbin/firewalld ; argv[]=/usr/sbin/firewalld --nofork --nopid $FIREWALLD_ARGS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", 
+        "FailureAction": "none", 
+        "FileDescriptorStoreMax": "0", 
+        "FragmentPath": "/usr/lib/systemd/system/firewalld.service", 
+        "GuessMainPID": "yes", 
+        "IOScheduling": "0", 
+        "Id": "firewalld.service", 
+        "IgnoreOnIsolate": "no", 
+        "IgnoreOnSnapshot": "no", 
+        "IgnoreSIGPIPE": "yes", 
+        "InactiveEnterTimestampMonotonic": "0", 
+        "InactiveExitTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "InactiveExitTimestampMonotonic": "185910070720", 
+        "JobTimeoutAction": "none", 
+        "JobTimeoutUSec": "0", 
+        "KillMode": "control-group", 
+        "KillSignal": "15", 
+        "LimitAS": "18446744073709551615", 
+        "LimitCORE": "18446744073709551615", 
+        "LimitCPU": "18446744073709551615", 
+        "LimitDATA": "18446744073709551615", 
+        "LimitFSIZE": "18446744073709551615", 
+        "LimitLOCKS": "18446744073709551615", 
+        "LimitMEMLOCK": "65536", 
+        "LimitMSGQUEUE": "819200", 
+        "LimitNICE": "0", 
+        "LimitNOFILE": "4096", 
+        "LimitNPROC": "1801", 
+        "LimitRSS": "18446744073709551615", 
+        "LimitRTPRIO": "0", 
+        "LimitRTTIME": "18446744073709551615", 
+        "LimitSIGPENDING": "1801", 
+        "LimitSTACK": "18446744073709551615", 
+        "LoadState": "loaded", 
+        "MainPID": "30874", 
+        "MemoryAccounting": "no", 
+        "MemoryCurrent": "18446744073709551615", 
+        "MemoryLimit": "18446744073709551615", 
+        "MountFlags": "0", 
+        "Names": "firewalld.service", 
+        "NeedDaemonReload": "no", 
+        "Nice": "0", 
+        "NoNewPrivileges": "no", 
+        "NonBlocking": "no", 
+        "NotifyAccess": "none", 
+        "OOMScoreAdjust": "0", 
+        "OnFailureJobMode": "replace", 
+        "PermissionsStartOnly": "no", 
+        "PrivateDevices": "no", 
+        "PrivateNetwork": "no", 
+        "PrivateTmp": "no", 
+        "ProtectHome": "no", 
+        "ProtectSystem": "no", 
+        "RefuseManualStart": "no", 
+        "RefuseManualStop": "no", 
+        "RemainAfterExit": "no", 
+        "Requires": "basic.target", 
+        "Restart": "no", 
+        "RestartUSec": "100ms", 
+        "Result": "success", 
+        "RootDirectoryStartOnly": "no", 
+        "RuntimeDirectoryMode": "0755", 
+        "SameProcessGroup": "no", 
+        "SecureBits": "0", 
+        "SendSIGHUP": "no", 
+        "SendSIGKILL": "yes", 
+        "Slice": "system.slice", 
+        "StandardError": "null", 
+        "StandardInput": "null", 
+        "StandardOutput": "null", 
+        "StartLimitAction": "none", 
+        "StartLimitBurst": "5", 
+        "StartLimitInterval": "10000000", 
+        "StartupBlockIOWeight": "18446744073709551615", 
+        "StartupCPUShares": "18446744073709551615", 
+        "StatusErrno": "0", 
+        "StopWhenUnneeded": "no", 
+        "SubState": "running", 
+        "SyslogLevelPrefix": "yes", 
+        "SyslogPriority": "30", 
+        "SystemCallErrorNumber": "0", 
+        "TTYReset": "no", 
+        "TTYVHangup": "no", 
+        "TTYVTDisallocate": "no", 
+        "TimeoutStartUSec": "1min 30s", 
+        "TimeoutStopUSec": "1min 30s", 
+        "TimerSlackNSec": "50000", 
+        "Transient": "no", 
+        "Type": "dbus", 
+        "UMask": "0022", 
+        "UnitFilePreset": "enabled", 
+        "UnitFileState": "enabled", 
+        "WantedBy": "basic.target", 
+        "Wants": "system.slice", 
+        "WatchdogTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "WatchdogTimestampMonotonic": "185910243518", 
+        "WatchdogUSec": "0"
+    }
+}
+2018-12-13 08:50:25,980 p=30395 u=student |  TASK [configure firewall for samba] *****************************************************************************************
+2018-12-13 08:50:25,980 p=30395 u=student |  task path: /home/student/troubleshooting/samba.yml:36
+2018-12-13 08:50:26,070 p=30395 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/firewalld.py
+2018-12-13 08:50:26,483 p=30395 u=student |  changed: [servera.lab.example.com] => {
+    "changed": true, 
+    "invocation": {
+        "module_args": {
+            "immediate": true, 
+            "interface": null, 
+            "masquerade": null, 
+            "offline": null, 
+            "permanent": true, 
+            "port": null, 
+            "rich_rule": null, 
+            "service": "samba", 
+            "source": null, 
+            "state": "enabled", 
+            "timeout": 0, 
+            "zone": null
+        }
+    }, 
+    "msg": "Permanent and Non-Permanent(immediate) operation, Changed service samba to enabled"
+}
+2018-12-13 08:50:26,486 p=30395 u=student |  TASK [deliver samba config] *************************************************************************************************
+2018-12-13 08:50:26,486 p=30395 u=student |  task path: /home/student/troubleshooting/samba.yml:43
+2018-12-13 08:50:26,499 p=30395 u=student |  fatal: [servera.lab.example.com]: FAILED! => {
+    "changed": false, 
+    "failed": true, 
+    "msg": "Unable to find 'samba.j2' in expected paths."
+}
+2018-12-13 08:50:26,500 p=30395 u=student |  	to retry, use: --limit @/home/student/troubleshooting/samba.retry
+
+2018-12-13 08:50:26,500 p=30395 u=student |  PLAY RECAP ******************************************************************************************************************
+2018-12-13 08:50:26,500 p=30395 u=student |  servera.lab.example.com    : ok=7    changed=3    unreachable=0    failed=1   
+2018-12-13 08:53:10,479 p=30487 u=student |  Using /home/student/troubleshooting/ansible.cfg as config file
+2018-12-13 08:53:10,534 p=30487 u=student |  Loading callback plugin default of type stdout, v2.0 from /usr/lib/python2.7/site-packages/ansible/plugins/callback/__init__.pyc
+2018-12-13 08:53:10,576 p=30487 u=student |  PLAYBOOK: samba.yml *********************************************************************************************************
+2018-12-13 08:53:10,577 p=30487 u=student |  1 plays in samba.yml
+2018-12-13 08:53:10,594 p=30487 u=student |  PLAY [Install a samba server] ***********************************************************************************************
+2018-12-13 08:53:10,624 p=30487 u=student |  TASK [Gathering Facts] ******************************************************************************************************
+2018-12-13 08:53:10,785 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/setup.py
+2018-12-13 08:53:11,267 p=30487 u=student |  ok: [servera.lab.example.com]
+2018-12-13 08:53:11,268 p=30487 u=student |  META: ran handlers
+2018-12-13 08:53:11,270 p=30487 u=student |  TASK [install samba] ********************************************************************************************************
+2018-12-13 08:53:11,270 p=30487 u=student |  task path: /home/student/troubleshooting/samba.yml:11
+2018-12-13 08:53:11,393 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/packaging/os/yum.py
+2018-12-13 08:53:11,715 p=30487 u=student |  ok: [servera.lab.example.com] => {
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "conf_file": null, 
+            "disable_gpg_check": false, 
+            "disablerepo": null, 
+            "enablerepo": null, 
+            "exclude": null, 
+            "install_repoquery": true, 
+            "installroot": "/", 
+            "list": null, 
+            "name": [
+                "samba"
+            ], 
+            "skip_broken": false, 
+            "state": "installed", 
+            "update_cache": false, 
+            "validate_certs": true
+        }
+    }, 
+    "msg": "", 
+    "rc": 0, 
+    "results": [
+        "samba-4.4.4-9.el7.x86_64 providing samba is already installed"
+    ]
+}
+2018-12-13 08:53:11,717 p=30487 u=student |  TASK [install firewalld] ****************************************************************************************************
+2018-12-13 08:53:11,717 p=30487 u=student |  task path: /home/student/troubleshooting/samba.yml:16
+2018-12-13 08:53:11,726 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/packaging/os/yum.py
+2018-12-13 08:53:12,020 p=30487 u=student |  ok: [servera.lab.example.com] => {
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "conf_file": null, 
+            "disable_gpg_check": false, 
+            "disablerepo": null, 
+            "enablerepo": null, 
+            "exclude": null, 
+            "install_repoquery": true, 
+            "installroot": "/", 
+            "list": null, 
+            "name": [
+                "firewalld"
+            ], 
+            "skip_broken": false, 
+            "state": "installed", 
+            "update_cache": false, 
+            "validate_certs": true
+        }
+    }, 
+    "msg": "", 
+    "rc": 0, 
+    "results": [
+        "firewalld-0.4.3.2-8.el7.noarch providing firewalld is already installed"
+    ]
+}
+2018-12-13 08:53:12,022 p=30487 u=student |  TASK [debug install_state variable] *****************************************************************************************
+2018-12-13 08:53:12,022 p=30487 u=student |  task path: /home/student/troubleshooting/samba.yml:21
+2018-12-13 08:53:12,034 p=30487 u=student |  ok: [servera.lab.example.com] => {
+    "msg": "The state for the samba service is installed"
+}
+2018-12-13 08:53:12,036 p=30487 u=student |  TASK [start samba] **********************************************************************************************************
+2018-12-13 08:53:12,036 p=30487 u=student |  task path: /home/student/troubleshooting/samba.yml:24
+2018-12-13 08:53:12,045 p=30487 u=student |  Running systemd
+2018-12-13 08:53:12,123 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/systemd.py
+2018-12-13 08:53:12,309 p=30487 u=student |  ok: [servera.lab.example.com] => {
+    "changed": false, 
+    "enabled": true, 
+    "invocation": {
+        "module_args": {
+            "daemon_reload": false, 
+            "enabled": true, 
+            "masked": null, 
+            "name": "smb", 
+            "no_block": false, 
+            "state": "started", 
+            "user": false
+        }
+    }, 
+    "name": "smb", 
+    "state": "started", 
+    "status": {
+        "ActiveEnterTimestamp": "Thu 2018-12-13 08:50:25 CET", 
+        "ActiveEnterTimestampMonotonic": "254394554342", 
+        "ActiveExitTimestampMonotonic": "0", 
+        "ActiveState": "active", 
+        "After": "syslog.target nmb.service system.slice network.target winbind.service systemd-journald.socket basic.target", 
+        "AllowIsolate": "no", 
+        "AssertResult": "yes", 
+        "AssertTimestamp": "Thu 2018-12-13 08:50:25 CET", 
+        "AssertTimestampMonotonic": "254394411644", 
+        "Before": "shutdown.target multi-user.target", 
+        "BlockIOAccounting": "no", 
+        "BlockIOWeight": "18446744073709551615", 
+        "CPUAccounting": "no", 
+        "CPUQuotaPerSecUSec": "infinity", 
+        "CPUSchedulingPolicy": "0", 
+        "CPUSchedulingPriority": "0", 
+        "CPUSchedulingResetOnFork": "no", 
+        "CPUShares": "18446744073709551615", 
+        "CanIsolate": "no", 
+        "CanReload": "yes", 
+        "CanStart": "yes", 
+        "CanStop": "yes", 
+        "CapabilityBoundingSet": "18446744073709551615", 
+        "ConditionResult": "yes", 
+        "ConditionTimestamp": "Thu 2018-12-13 08:50:25 CET", 
+        "ConditionTimestampMonotonic": "254394411644", 
+        "Conflicts": "shutdown.target", 
+        "ControlGroup": "/system.slice/smb.service", 
+        "ControlPID": "0", 
+        "DefaultDependencies": "yes", 
+        "Delegate": "no", 
+        "Description": "Samba SMB Daemon", 
+        "DevicePolicy": "auto", 
+        "Environment": "KRB5CCNAME=FILE:/run/samba/krb5cc_samba", 
+        "EnvironmentFile": "/etc/sysconfig/samba (ignore_errors=yes)", 
+        "ExecMainCode": "0", 
+        "ExecMainExitTimestampMonotonic": "0", 
+        "ExecMainPID": "9345", 
+        "ExecMainStartTimestamp": "Thu 2018-12-13 08:50:25 CET", 
+        "ExecMainStartTimestampMonotonic": "254394440976", 
+        "ExecMainStatus": "0", 
+        "ExecReload": "{ path=/usr/bin/kill ; argv[]=/usr/bin/kill -HUP $MAINPID ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", 
+        "ExecStart": "{ path=/usr/sbin/smbd ; argv[]=/usr/sbin/smbd $SMBDOPTIONS ; ignore_errors=no ; start_time=[Thu 2018-12-13 08:50:25 CET] ; stop_time=[n/a] ; pid=9343 ; code=(null) ; status=0/0 }", 
+        "FailureAction": "none", 
+        "FileDescriptorStoreMax": "0", 
+        "FragmentPath": "/usr/lib/systemd/system/smb.service", 
+        "GuessMainPID": "yes", 
+        "IOScheduling": "0", 
+        "Id": "smb.service", 
+        "IgnoreOnIsolate": "no", 
+        "IgnoreOnSnapshot": "no", 
+        "IgnoreSIGPIPE": "yes", 
+        "InactiveEnterTimestampMonotonic": "0", 
+        "InactiveExitTimestamp": "Thu 2018-12-13 08:50:25 CET", 
+        "InactiveExitTimestampMonotonic": "254394412536", 
+        "JobTimeoutAction": "none", 
+        "JobTimeoutUSec": "0", 
+        "KillMode": "control-group", 
+        "KillSignal": "15", 
+        "LimitAS": "18446744073709551615", 
+        "LimitCORE": "18446744073709551615", 
+        "LimitCPU": "18446744073709551615", 
+        "LimitDATA": "18446744073709551615", 
+        "LimitFSIZE": "18446744073709551615", 
+        "LimitLOCKS": "18446744073709551615", 
+        "LimitMEMLOCK": "65536", 
+        "LimitMSGQUEUE": "819200", 
+        "LimitNICE": "0", 
+        "LimitNOFILE": "16384", 
+        "LimitNPROC": "1801", 
+        "LimitRSS": "18446744073709551615", 
+        "LimitRTPRIO": "0", 
+        "LimitRTTIME": "18446744073709551615", 
+        "LimitSIGPENDING": "1801", 
+        "LimitSTACK": "18446744073709551615", 
+        "LoadState": "loaded", 
+        "MainPID": "9345", 
+        "MemoryAccounting": "no", 
+        "MemoryCurrent": "18446744073709551615", 
+        "MemoryLimit": "18446744073709551615", 
+        "MountFlags": "0", 
+        "Names": "smb.service", 
+        "NeedDaemonReload": "no", 
+        "Nice": "0", 
+        "NoNewPrivileges": "no", 
+        "NonBlocking": "no", 
+        "NotifyAccess": "all", 
+        "OOMScoreAdjust": "0", 
+        "OnFailureJobMode": "replace", 
+        "PIDFile": "/run/smbd.pid", 
+        "PermissionsStartOnly": "no", 
+        "PrivateDevices": "no", 
+        "PrivateNetwork": "no", 
+        "PrivateTmp": "no", 
+        "ProtectHome": "no", 
+        "ProtectSystem": "no", 
+        "RefuseManualStart": "no", 
+        "RefuseManualStop": "no", 
+        "RemainAfterExit": "no", 
+        "Requires": "basic.target", 
+        "Restart": "no", 
+        "RestartUSec": "100ms", 
+        "Result": "success", 
+        "RootDirectoryStartOnly": "no", 
+        "RuntimeDirectoryMode": "0755", 
+        "SameProcessGroup": "no", 
+        "SecureBits": "0", 
+        "SendSIGHUP": "no", 
+        "SendSIGKILL": "yes", 
+        "Slice": "system.slice", 
+        "StandardError": "inherit", 
+        "StandardInput": "null", 
+        "StandardOutput": "journal", 
+        "StartLimitAction": "none", 
+        "StartLimitBurst": "5", 
+        "StartLimitInterval": "10000000", 
+        "StartupBlockIOWeight": "18446744073709551615", 
+        "StartupCPUShares": "18446744073709551615", 
+        "StatusErrno": "0", 
+        "StatusText": "smbd: ready to serve connections...", 
+        "StopWhenUnneeded": "no", 
+        "SubState": "running", 
+        "SyslogLevelPrefix": "yes", 
+        "SyslogPriority": "30", 
+        "SystemCallErrorNumber": "0", 
+        "TTYReset": "no", 
+        "TTYVHangup": "no", 
+        "TTYVTDisallocate": "no", 
+        "TimeoutStartUSec": "1min 30s", 
+        "TimeoutStopUSec": "1min 30s", 
+        "TimerSlackNSec": "50000", 
+        "Transient": "no", 
+        "Type": "notify", 
+        "UMask": "0022", 
+        "UnitFilePreset": "disabled", 
+        "UnitFileState": "enabled", 
+        "WantedBy": "multi-user.target", 
+        "Wants": "system.slice", 
+        "WatchdogTimestamp": "Thu 2018-12-13 08:50:25 CET", 
+        "WatchdogTimestampMonotonic": "254394554315", 
+        "WatchdogUSec": "0"
+    }
+}
+2018-12-13 08:53:12,312 p=30487 u=student |  TASK [start firewalld] ******************************************************************************************************
+2018-12-13 08:53:12,312 p=30487 u=student |  task path: /home/student/troubleshooting/samba.yml:30
+2018-12-13 08:53:12,322 p=30487 u=student |  Running systemd
+2018-12-13 08:53:12,323 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/systemd.py
+2018-12-13 08:53:12,532 p=30487 u=student |  ok: [servera.lab.example.com] => {
+    "changed": false, 
+    "enabled": true, 
+    "invocation": {
+        "module_args": {
+            "daemon_reload": false, 
+            "enabled": true, 
+            "masked": null, 
+            "name": "firewalld", 
+            "no_block": false, 
+            "state": "started", 
+            "user": false
+        }
+    }, 
+    "name": "firewalld", 
+    "state": "started", 
+    "status": {
+        "ActiveEnterTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "ActiveEnterTimestampMonotonic": "185910243578", 
+        "ActiveExitTimestampMonotonic": "0", 
+        "ActiveState": "active", 
+        "After": "system.slice dbus.service basic.target polkit.service", 
+        "AllowIsolate": "no", 
+        "AssertResult": "yes", 
+        "AssertTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "AssertTimestampMonotonic": "185910069374", 
+        "Before": "network.target NetworkManager.service shutdown.target libvirtd.service", 
+        "BlockIOAccounting": "no", 
+        "BlockIOWeight": "18446744073709551615", 
+        "BusName": "org.fedoraproject.FirewallD1", 
+        "CPUAccounting": "no", 
+        "CPUQuotaPerSecUSec": "infinity", 
+        "CPUSchedulingPolicy": "0", 
+        "CPUSchedulingPriority": "0", 
+        "CPUSchedulingResetOnFork": "no", 
+        "CPUShares": "18446744073709551615", 
+        "CanIsolate": "no", 
+        "CanReload": "yes", 
+        "CanStart": "yes", 
+        "CanStop": "yes", 
+        "CapabilityBoundingSet": "18446744073709551615", 
+        "ConditionResult": "yes", 
+        "ConditionTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "ConditionTimestampMonotonic": "185910069374", 
+        "Conflicts": "shutdown.target ebtables.service ipset.service iptables.service ip6tables.service", 
+        "ControlGroup": "/system.slice/firewalld.service", 
+        "ControlPID": "0", 
+        "DefaultDependencies": "yes", 
+        "Delegate": "no", 
+        "Description": "firewalld - dynamic firewall daemon", 
+        "DevicePolicy": "auto", 
+        "Documentation": "man:firewalld(1)", 
+        "EnvironmentFile": "/etc/sysconfig/firewalld (ignore_errors=yes)", 
+        "ExecMainCode": "0", 
+        "ExecMainExitTimestampMonotonic": "0", 
+        "ExecMainPID": "30874", 
+        "ExecMainStartTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "ExecMainStartTimestampMonotonic": "185910070698", 
+        "ExecMainStatus": "0", 
+        "ExecReload": "{ path=/bin/kill ; argv[]=/bin/kill -HUP $MAINPID ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", 
+        "ExecStart": "{ path=/usr/sbin/firewalld ; argv[]=/usr/sbin/firewalld --nofork --nopid $FIREWALLD_ARGS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", 
+        "FailureAction": "none", 
+        "FileDescriptorStoreMax": "0", 
+        "FragmentPath": "/usr/lib/systemd/system/firewalld.service", 
+        "GuessMainPID": "yes", 
+        "IOScheduling": "0", 
+        "Id": "firewalld.service", 
+        "IgnoreOnIsolate": "no", 
+        "IgnoreOnSnapshot": "no", 
+        "IgnoreSIGPIPE": "yes", 
+        "InactiveEnterTimestampMonotonic": "0", 
+        "InactiveExitTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "InactiveExitTimestampMonotonic": "185910070720", 
+        "JobTimeoutAction": "none", 
+        "JobTimeoutUSec": "0", 
+        "KillMode": "control-group", 
+        "KillSignal": "15", 
+        "LimitAS": "18446744073709551615", 
+        "LimitCORE": "18446744073709551615", 
+        "LimitCPU": "18446744073709551615", 
+        "LimitDATA": "18446744073709551615", 
+        "LimitFSIZE": "18446744073709551615", 
+        "LimitLOCKS": "18446744073709551615", 
+        "LimitMEMLOCK": "65536", 
+        "LimitMSGQUEUE": "819200", 
+        "LimitNICE": "0", 
+        "LimitNOFILE": "4096", 
+        "LimitNPROC": "1801", 
+        "LimitRSS": "18446744073709551615", 
+        "LimitRTPRIO": "0", 
+        "LimitRTTIME": "18446744073709551615", 
+        "LimitSIGPENDING": "1801", 
+        "LimitSTACK": "18446744073709551615", 
+        "LoadState": "loaded", 
+        "MainPID": "30874", 
+        "MemoryAccounting": "no", 
+        "MemoryCurrent": "18446744073709551615", 
+        "MemoryLimit": "18446744073709551615", 
+        "MountFlags": "0", 
+        "Names": "firewalld.service", 
+        "NeedDaemonReload": "no", 
+        "Nice": "0", 
+        "NoNewPrivileges": "no", 
+        "NonBlocking": "no", 
+        "NotifyAccess": "none", 
+        "OOMScoreAdjust": "0", 
+        "OnFailureJobMode": "replace", 
+        "PermissionsStartOnly": "no", 
+        "PrivateDevices": "no", 
+        "PrivateNetwork": "no", 
+        "PrivateTmp": "no", 
+        "ProtectHome": "no", 
+        "ProtectSystem": "no", 
+        "RefuseManualStart": "no", 
+        "RefuseManualStop": "no", 
+        "RemainAfterExit": "no", 
+        "Requires": "basic.target", 
+        "Restart": "no", 
+        "RestartUSec": "100ms", 
+        "Result": "success", 
+        "RootDirectoryStartOnly": "no", 
+        "RuntimeDirectoryMode": "0755", 
+        "SameProcessGroup": "no", 
+        "SecureBits": "0", 
+        "SendSIGHUP": "no", 
+        "SendSIGKILL": "yes", 
+        "Slice": "system.slice", 
+        "StandardError": "null", 
+        "StandardInput": "null", 
+        "StandardOutput": "null", 
+        "StartLimitAction": "none", 
+        "StartLimitBurst": "5", 
+        "StartLimitInterval": "10000000", 
+        "StartupBlockIOWeight": "18446744073709551615", 
+        "StartupCPUShares": "18446744073709551615", 
+        "StatusErrno": "0", 
+        "StopWhenUnneeded": "no", 
+        "SubState": "running", 
+        "SyslogLevelPrefix": "yes", 
+        "SyslogPriority": "30", 
+        "SystemCallErrorNumber": "0", 
+        "TTYReset": "no", 
+        "TTYVHangup": "no", 
+        "TTYVTDisallocate": "no", 
+        "TimeoutStartUSec": "1min 30s", 
+        "TimeoutStopUSec": "1min 30s", 
+        "TimerSlackNSec": "50000", 
+        "Transient": "no", 
+        "Type": "dbus", 
+        "UMask": "0022", 
+        "UnitFilePreset": "enabled", 
+        "UnitFileState": "enabled", 
+        "WantedBy": "basic.target", 
+        "Wants": "system.slice", 
+        "WatchdogTimestamp": "Wed 2018-12-12 13:49:01 CET", 
+        "WatchdogTimestampMonotonic": "185910243518", 
+        "WatchdogUSec": "0"
+    }
+}
+2018-12-13 08:53:12,534 p=30487 u=student |  TASK [configure firewall for samba] *****************************************************************************************
+2018-12-13 08:53:12,534 p=30487 u=student |  task path: /home/student/troubleshooting/samba.yml:36
+2018-12-13 08:53:12,634 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/firewalld.py
+2018-12-13 08:53:12,991 p=30487 u=student |  ok: [servera.lab.example.com] => {
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "immediate": true, 
+            "interface": null, 
+            "masquerade": null, 
+            "offline": null, 
+            "permanent": true, 
+            "port": null, 
+            "rich_rule": null, 
+            "service": "samba", 
+            "source": null, 
+            "state": "enabled", 
+            "timeout": 0, 
+            "zone": null
+        }
+    }, 
+    "msg": "Permanent and Non-Permanent(immediate) operation"
+}
+2018-12-13 08:53:12,993 p=30487 u=student |  TASK [deliver samba config] *************************************************************************************************
+2018-12-13 08:53:12,993 p=30487 u=student |  task path: /home/student/troubleshooting/samba.yml:43
+2018-12-13 08:53:13,075 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/files/stat.py
+2018-12-13 08:53:13,297 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/files/stat.py
+2018-12-13 08:53:13,575 p=30487 u=student |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/files/copy.py
+2018-12-13 08:53:13,734 p=30487 u=student |  changed: [servera.lab.example.com] => {
+    "changed": true, 
+    "checksum": "e5c193ef622bac5e1f767b0da6c8c73bd109b1fa", 
+    "dest": "/etc/samba/smb.conf", 
+    "gid": 0, 
+    "group": "root", 
+    "invocation": {
+        "module_args": {
+            "attributes": null, 
+            "backup": false, 
+            "content": null, 
+            "delimiter": null, 
+            "dest": "/etc/samba/smb.conf", 
+            "directory_mode": null, 
+            "follow": true, 
+            "force": true, 
+            "group": "root", 
+            "mode": 420, 
+            "original_basename": "samba.conf.j2", 
+            "owner": "root", 
+            "regexp": null, 
+            "remote_src": null, 
+            "selevel": null, 
+            "serole": null, 
+            "setype": null, 
+            "seuser": null, 
+            "src": "/home/devops/.ansible/tmp/ansible-tmp-1544687593.26-106061171438813/source", 
+            "unsafe_writes": null, 
+            "validate": null
+        }
+    }, 
+    "md5sum": "de5ab1b3e53382b59239b9ad300cc887", 
+    "mode": "0644", 
+    "owner": "root", 
+    "secontext": "system_u:object_r:samba_etc_t:s0", 
+    "size": 520, 
+    "src": "/home/devops/.ansible/tmp/ansible-tmp-1544687593.26-106061171438813/source", 
+    "state": "file", 
+    "uid": 0
+}
+2018-12-13 08:53:13,735 p=30487 u=student |  META: ran handlers
+2018-12-13 08:53:13,735 p=30487 u=student |  META: ran handlers
+2018-12-13 08:53:13,735 p=30487 u=student |  PLAY RECAP ******************************************************************************************************************
+2018-12-13 08:53:13,736 p=30487 u=student |  servera.lab.example.com    : ok=8    changed=1    unreachable=0    failed=0   
+2018-12-13 09:03:14,247 p=30727 u=student |  PLAY [create mail relay servers] ********************************************************************************************
+2018-12-13 09:03:14,278 p=30727 u=student |  TASK [Gathering Facts] ******************************************************************************************************
+2018-12-13 09:03:14,932 p=30727 u=student |  ok: [servera.lab.example.com]
+2018-12-13 09:03:14,935 p=30727 u=student |  TASK [install postfix package] **********************************************************************************************
+2018-12-13 09:03:16,964 p=30727 u=student |  changed: [servera.lab.example.com]
+2018-12-13 09:03:16,966 p=30727 u=student |  TASK [install mail config files] ********************************************************************************************
+2018-12-13 09:03:17,736 p=30727 u=student |  changed: [servera.lab.example.com]
+2018-12-13 09:03:17,738 p=30727 u=student |  TASK [check main.cf file] ***************************************************************************************************
+2018-12-13 09:03:17,930 p=30727 u=student |  ok: [servera.lab.example.com]
+2018-12-13 09:03:17,933 p=30727 u=student |  TASK [verify main.cf file exists] *******************************************************************************************
+2018-12-13 09:03:17,944 p=30727 u=student |  ok: [servera.lab.example.com] => {
+    "msg": "The main.cf file exists"
+}
+2018-12-13 09:03:17,947 p=30727 u=student |  TASK [start and enable mail services] ***************************************************************************************
+2018-12-13 09:03:19,662 p=30727 u=student |  changed: [servera.lab.example.com]
+2018-12-13 09:03:19,664 p=30727 u=student |  TASK [check for always_bcc] *************************************************************************************************
+2018-12-13 09:03:19,924 p=30727 u=student |  changed: [servera.lab.example.com]
+2018-12-13 09:03:19,927 p=30727 u=student |  TASK [email notification of always_bcc config] ******************************************************************************
+2018-12-13 09:03:19,935 p=30727 u=student |  skipping: [servera.lab.example.com]
+2018-12-13 09:03:19,935 p=30727 u=student |  RUNNING HANDLER [restart postfix] *******************************************************************************************
+2018-12-13 09:03:20,345 p=30727 u=student |  changed: [servera.lab.example.com]
+2018-12-13 09:03:20,347 p=30727 u=student |  PLAY RECAP ******************************************************************************************************************
+2018-12-13 09:03:20,347 p=30727 u=student |  servera.lab.example.com    : ok=8    changed=5    unreachable=0    failed=0   
+2018-12-13 09:03:34,957 p=30814 u=student |  PLAY [create mail relay servers] ********************************************************************************************
+2018-12-13 09:03:34,986 p=30814 u=student |  TASK [Gathering Facts] ******************************************************************************************************
+2018-12-13 09:03:35,428 p=30814 u=student |  ok: [servera.lab.example.com]
+2018-12-13 09:03:35,430 p=30814 u=student |  TASK [install postfix package] **********************************************************************************************
+2018-12-13 09:03:35,853 p=30814 u=student |  ok: [servera.lab.example.com]
+2018-12-13 09:03:35,855 p=30814 u=student |  TASK [install mail config files] ********************************************************************************************
+2018-12-13 09:03:36,560 p=30814 u=student |  ok: [servera.lab.example.com]
+2018-12-13 09:03:36,563 p=30814 u=student |  TASK [check main.cf file] ***************************************************************************************************
+2018-12-13 09:03:36,758 p=30814 u=student |  ok: [servera.lab.example.com]
+2018-12-13 09:03:36,760 p=30814 u=student |  TASK [verify main.cf file exists] *******************************************************************************************
+2018-12-13 09:03:36,772 p=30814 u=student |  ok: [servera.lab.example.com] => {
+    "msg": "The main.cf file exists"
+}
+2018-12-13 09:03:36,775 p=30814 u=student |  TASK [start and enable mail services] ***************************************************************************************
+2018-12-13 09:03:37,042 p=30814 u=student |  ok: [servera.lab.example.com]
+2018-12-13 09:03:37,044 p=30814 u=student |  TASK [check for always_bcc] *************************************************************************************************
+2018-12-13 09:03:37,293 p=30814 u=student |  skipping: [servera.lab.example.com]
+2018-12-13 09:03:37,295 p=30814 u=student |  TASK [email notification of always_bcc config] ******************************************************************************
+2018-12-13 09:03:37,305 p=30814 u=student |  fatal: [servera.lab.example.com]: FAILED! => {"failed": true, "msg": "The conditional check 'bcc_state.stdout != 'always_bcc ='' failed. The error was: error while evaluating conditional (bcc_state.stdout != 'always_bcc ='): 'dict object' has no attribute 'stdout'\n\nThe error appears to have been in '/home/student/troubleshooting/mailrelay.yml': line 42, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: email notification of always_bcc config\n      ^ here\n"}
+2018-12-13 09:03:37,306 p=30814 u=student |  	to retry, use: --limit @/home/student/troubleshooting/mailrelay.retry
+
+2018-12-13 09:03:37,306 p=30814 u=student |  PLAY RECAP ******************************************************************************************************************
+2018-12-13 09:03:37,306 p=30814 u=student |  servera.lab.example.com    : ok=6    changed=0    unreachable=0    failed=1   

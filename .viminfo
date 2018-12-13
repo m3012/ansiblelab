@@ -8,23 +8,25 @@
 # hlsearch on (H) or off (h):
 ~H
 # Last Search Pattern:
-~MSle0~/permament
+~MSle0~/with
 
 # Command Line History (newest to oldest):
 :x
 :w
+:14
+:43
 :37
 :c
 :q!
 :12
 :42
-:43
 :q
 :17
 :$
 :13
 
 # Search String History (newest to oldest):
+?/with
 ?/permament
 
 # Expression History (newest to oldest):
@@ -53,21 +55,37 @@
 "9	LINE	0
 	
 ""-	CHAR	0
-	e
+	 ansible_host=tower.lab.example.com
 
 # File marks:
-'0  37  8  ~/lab-optimizing-ansible/upgrade_webserver.yml
-'1  1  2  ~/configure-async/async.yml
-'2  7  23  ~/lab-optimizing-ansible/templates/index-ver1.html.j2
-'3  62  0  ~/lab-optimizing-ansible/upgrade_webserver.yml
-'4  29  55  ~/lab-optimizing-ansible/upgrade_webserver.yml
-'5  34  0  ~/lab-optimizing-ansible/upgrade_webserver.yml
-'6  20  40  ~/lab-optimizing-ansible/upgrade_webserver.yml
-'7  9  2  ~/lab-optimizing-ansible/upgrade_webserver.yml
-'8  18  16  ~/lab-optimizing-ansible/upgrade_webserver.yml
-'9  16  36  ~/lab-optimizing-ansible/upgrade_webserver.yml
+'0  2  22  ~/troubleshooting-lab/inventory-lab
+'1  13  29  ~/troubleshooting-lab/secure-web.yml
+'2  7  36  ~/troubleshooting-lab/secure-web.yml
+'3  50  4  ~/troubleshooting/mailrelay.yml
+'4  45  21  ~/troubleshooting/samba.yml
+'5  2  15  ~/troubleshooting/inventory
+'6  14  6  ~/troubleshooting/samba.yml
+'7  8  36  ~/troubleshooting/samba.yml
+'8  5  39  ~/troubleshooting/ansible.cfg
+'9  6  0  ~/troubleshooting/ansible.cfg
 
 # Jumplist (newest first):
+-'  2  22  ~/troubleshooting-lab/inventory-lab
+-'  1  0  ~/troubleshooting-lab/inventory-lab
+-'  13  29  ~/troubleshooting-lab/secure-web.yml
+-'  7  4  ~/troubleshooting-lab/secure-web.yml
+-'  1  0  ~/troubleshooting-lab/secure-web.yml
+-'  50  4  ~/troubleshooting/mailrelay.yml
+-'  1  0  ~/troubleshooting/mailrelay.yml
+-'  45  21  ~/troubleshooting/samba.yml
+-'  14  6  ~/troubleshooting/samba.yml
+-'  2  15  ~/troubleshooting/inventory
+-'  1  0  ~/troubleshooting/inventory
+-'  8  4  ~/troubleshooting/samba.yml
+-'  1  0  ~/troubleshooting/samba.yml
+-'  5  39  ~/troubleshooting/ansible.cfg
+-'  6  0  ~/troubleshooting/ansible.cfg
+-'  1  0  ~/troubleshooting/ansible.cfg
 -'  37  8  ~/lab-optimizing-ansible/upgrade_webserver.yml
 -'  62  0  ~/lab-optimizing-ansible/upgrade_webserver.yml
 -'  1  2  ~/configure-async/async.yml
@@ -151,22 +169,57 @@
 -'  14  0  ~/lab-task-control/configure_firewall.yml
 -'  19  4  ~/lab-task-control/configure_firewall.yml
 -'  31  11  ~/lab-task-control/playbook.yml
--'  42  6  ~/lab-task-control/playbook.yml
--'  28  24  ~/lab-task-control/configure_web.yml
--'  41  2  ~/lab-task-control/configure_web.yml
--'  11  4  ~/lab-task-control/install_packages.yml
--'  8  6  ~/lab-task-control/install_packages.yml
--'  6  4  ~/lab-task-control/install_packages.yml
--'  7  6  ~/lab-task-control/install_packages.yml
--'  15  4  ~/lab-task-control/install_packages.yml
--'  1  0  ~/lab-task-control/playbook.yml
--'  1  0  ~/lab-task-control/configure_firewall.yml
--'  1  0  ~/lab-task-control/configure_web.yml
--'  1  0  ~/lab-task-control/install_packages.yml
--'  18  0  ~/dev-failures/playbook.yml
--'  1  0  ~/dev-failures/playbook.yml
 
 # History of marks within files (newest to oldest):
+
+> ~/troubleshooting-lab/inventory-lab
+	"	2	22
+	.	2	22
+	+	2	22
+
+> ~/troubleshooting-lab/secure-web.yml
+	"	13	29
+	^	13	30
+	.	13	29
+	+	7	36
+	+	43	8
+	+	44	8
+	+	45	8
+	+	46	8
+	+	47	8
+	+	48	8
+	+	49	8
+	+	13	29
+
+> ~/troubleshooting/mailrelay.yml
+	"	50	4
+
+> ~/troubleshooting/samba.yml
+	"	45	21
+	^	45	22
+	.	45	21
+	+	8	36
+	+	43	2
+	+	44	2
+	+	45	2
+	+	46	2
+	+	47	2
+	+	48	2
+	+	49	2
+	+	14	33
+	+	45	21
+
+> ~/troubleshooting/inventory
+	"	2	15
+	^	2	16
+	.	2	15
+	+	2	15
+
+> ~/troubleshooting/ansible.cfg
+	"	5	39
+	^	5	40
+	.	5	25
+	+	5	25
 
 > ~/lab-optimizing-ansible/upgrade_webserver.yml
 	"	37	8
@@ -357,66 +410,3 @@
 	+	7	15
 	+	8	0
 	y	4	0
-
-> ~/lab-roles/role/student.myenv/tasks/main.yml
-	"	8	0
-	.	8	0
-	+	33	0
-	+	33	0
-	+	11	32
-	+	13	14
-	+	11	18
-	+	18	46
-	+	23	32
-	+	25	29
-	+	32	0
-	+	27	18
-	+	31	13
-	+	4	25
-	+	5	7
-	+	6	35
-	+	8	0
-	+	7	23
-	+	8	0
-
-> ~/dev-roles/use-bash_env-role.yml
-	"	7	6
-	^	7	7
-	.	7	6
-	+	8	6
-	+	3	19
-	+	5	13
-	+	7	6
-
-> ~/dev-roles/install-roles.yml
-	"	3	23
-	^	3	24
-	.	3	8
-	+	3	8
-
-> ~/dev-roles/roles/myvhost/tasks/main.yml
-	"	16	25
-	^	16	26
-	.	16	25
-	+	28	0
-	+	12	0
-	+	11	16
-	+	16	22
-	+	14	5
-	+	15	13
-	+	16	49
-	+	27	0
-	+	16	25
-
-> ~/dev-roles/roles/myvhost/meta/main.yml
-	"	56	47
-	^	56	48
-	.	56	47
-	+	55	12
-	+	56	47
-
-> ~/dev-roles/roles/myfirewall/defaults/main.yml
-	"	5	0
-	^	5	0
-	.	4	21
-	+	4	21
